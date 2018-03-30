@@ -15,7 +15,9 @@ Arbor has the following kinds of message:
 * NEW_MESSAGE - 2
 
 All Arbor messages are JSON objects in which the `Type` key indicates the
-kind of message
+kind of message.
+
+All Arbor messages end with a newline character after the close of the JSON object.
 
 WELCOME messages inform a client of the basic server state information needed to
 join the server and communicate with it.
