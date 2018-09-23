@@ -19,13 +19,16 @@ kind of message.
 
 All Arbor messages end with a newline character after the close of the JSON object.
 
+It is illegal for the JSON representation of a single Arbor message to exceed 65536 bytes,
+including the newline character that marks the end of the message.
+
 WELCOME messages inform a client of the basic server state information needed to
 join the server and communicate with it.
 
 WELCOME messages contain the following JSON fields:
 * `Type` the message, type, should be 0 for WELCOME
 * `Root` the server's root message ID
-* `Recent` an array of recent message IDs
+* `Recent` an array of recent message IDs. This array may have any number of elements (including none), but all elements must be string message UUIDs.
 * `Major` the major protocol version number of the server
 * `Minor` the minor protocol version number of the server
 
