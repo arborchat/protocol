@@ -105,7 +105,7 @@ NEW_MESSAGE messages contain the following JSON fields:
 - `UUID` (string message ID) the id of this message, **only valid in messages from the server**. If a client sends a NEW_MESSAGE to the server with the UUID set, it will be ignored or rejected.
 - `Parent` (string message ID) the id of this message's parent message.
 - `Content` (string) the string contents of the message
-- `Timestamp` (integer) the UNIX timestamp when the message was sent by the user who composed it. In this case, the UNIX timestamp is the number of seconds since January 1st, 1970
+- `Timestamp` (integer) the UNIX timestamp when the message was sent by the user who composed it. In this case, the UNIX timestamp is the number of seconds since January 1st, 1970 00:00:00 UTC
 - `Username` (string) the string name of the user who wrote the message. The server does not authenticate users, so this should be treated as a hint of the origin of a message, rather than a reliable source
 
 A sample NEW_MESSAGE looks like this:
