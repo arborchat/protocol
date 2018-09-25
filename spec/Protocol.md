@@ -137,6 +137,8 @@ to all clients (including the one that created it).
 - Use message hashes as message IDs.
 - Use multiencoding to describe the wire format in use when connecting to a server.
 - Implement error messages.
+- Implement tree queries.
+- Implement explicit query responses.
 - Investigate clustered servers.
 - Investigate using IPFS instead of a server.
 - Consider protocol level user status (to implement "online"/"away"/"offline" type features).
