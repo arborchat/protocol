@@ -144,3 +144,5 @@ to all clients (including the one that created it).
 - Consider protocol level user status (to implement "online"/"away"/"offline" type features).
 - Consider more precise timestamps.
 - Run Arbor over TLS.
+- Consider making immediate replies to the root message special as the "root" of a "conversation"
+- Track tree depth as a field on messages. This would enable clients to create placeholders for all of the ancestors of a message before it knew their contents.
