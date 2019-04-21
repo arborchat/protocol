@@ -58,38 +58,66 @@ All nodes in the forest share some fields. These are described generally here, t
 
 Common fields:
 
-- `version` (Varint): a variable-length unsigned integer representing the version of the Arbor Forest specification that this node uses. This initial draft is version 1.
-- `node_type` (Node Type): the type of the node within the forest.
-- `parent` (Fully Qualified Hash): the hash of the parent tree node. For identity nodes, this will always be the null hash (of all zeroes)
-- `id_desc` (Hash Descriptor): the hash algorithm and digest size that should be used to compute this Node's Id
-- `depth` (Tree Depth): the number of levels this node is from the root message in its tree.
-- `metadata` (Fully Qualified Content): arbitrary binary data
-- `signature_authority` (Fully Qualified Hash): the id of the Identity node that signed this node
-- `signature` (Fully Qualified Signature): the actual binary signature of the node. The structure of this field varies by the type of key in the `signature_authority`. The Content Type of this field will usually be a signature type of some kind.
+- `version` **Varint**: a variable-length unsigned integer representing the version of the Arbor Forest specification that this node uses. This initial draft is version 1.
+- `node_type` **Node Type**: the type of the node within the forest.
+- `parent` **Fully Qualified Hash**: the hash of the parent tree node. For identity nodes, this will always be the null hash **of all zeroes**
+- `id_desc` **Hash Descriptor**: the hash algorithm and digest size that should be used to compute this Node's Id
+- `depth` **Tree Depth**: the number of levels this node is from the root message in its tree.
+- `metadata` **Fully Qualified Content**: arbitrary binary data
+- `signature_authority` **Fully Qualified Hash**: the id of the Identity node that signed this node
+- `signature` **Fully Qualified Signature**: the actual binary signature of the node. The structure of this field varies by the type of key in the `signature_authority`. The Content Type of this field will usually be a signature type of some kind.
+
+### Common Structure
+
+All node types are signed and hashed with their data laid out in a specific order in memory. The procedure for constructing a node is as follows:
+
+Determine the values of these fields:
+
+- `version`
+- `node_type`
+- `parent`
+- `id_desc`
+- `depth`
+- `metadata`
+- `signature_authority`
+- all node-specific fields **order specified in the description of each node type**
+
+Write them into a buffer in the order above, with all integers written in network byte order **big endian**.
+
+Sign the contents of the buffer using the key pointed to by `signature_authority`, and use it to create the value of `signature`.
+
+Concatenate the value of `signature` to the end of the existing buffer, then hash the entire buffer with the algorithm and digest size specified by `id_des` to determine the node's actual Id.
 
 ### Identity
 
 An identity node has the following fields:
 
-- `name` (Text): the name of the user who controls this key
-- `public_key` (Fully Qualified Key): the binary representation of the public key
+- `name` **Text**: the name of the user who controls this key
+- `public_key` **Fully Qualified Key**: the binary representation of the public key
+
+These fields should be processed in the order given above when signing and hashing the node.
  
 ### Community
 
 A Community node has the following fields:
 
-- `name` (Text): the name of the user who controls this key
+- `name` **Text**: the name of the user who controls this key
 
+These fields should be processed in the order given above when signing and hashing the node.
+ 
 ### Conversation
 
 A Conversation node has the following fields:
 
-- `content` (Fully Qualified Content)
+- `content` **Fully Qualified Content**
+
+These fields should be processed in the order given above when signing and hashing the node.
 
 ### Reply
 
 A Conversation node has the following fields:
 
-- `conversation_id` (Fully Qualified Hash)
-- `content` (Fully Qualified Content)
+- `conversation_id` **Fully Qualified Hash**
+- `content` **Fully Qualified Content**
 
+These fields should be processed in the order given above when signing and hashing the node.
