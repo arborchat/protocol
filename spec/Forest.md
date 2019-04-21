@@ -86,7 +86,7 @@ Write them into a buffer in the order above, with all integers written in networ
 
 Sign the contents of the buffer using the key pointed to by `signature_authority`, and use it to create the value of `signature`.
 
-Concatenate the value of `signature` to the end of the existing buffer, then hash the entire buffer with the algorithm and digest size specified by `id_des` to determine the node's actual Id.
+Concatenate the value of `signature` to the end of the existing buffer, then hash the entire buffer with the algorithm and digest size specified by `id_desc` to determine the node's actual Id.
 
 ### Identity
 
