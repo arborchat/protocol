@@ -39,10 +39,10 @@ The Arbor Forest uses a number of common field types with specific meanings. The
 - **Signature Type**: an 8-bit unsigned integer representing a kind of cryptographic signature. Valid values are:
   - 1: OpenPGP binary signature
 - **Content Length**: an unsigned 16-bit integer representing how many bytes are in another field.
-- **Hash Descriptor**: A Hash Type followed by a Content Length. The Content Length specifies how many bytes the hash digest output should be. These two pieces of data fully specify the hash procedure needed to construct a given Hash Value.
+- **Hash Descriptor**: A Hash Type followed by a Content Length. The Content Length specifies how many bytes the hash digest output should be. These two pieces of data fully specify the hash procedure needed to construct a given hash.
 - **Tree Depth**: an unsigned 32-bit integer indicating how many levels beneath the root of a particular tree a given node is.
 - **Blob**: binary data with an unspecified length. Blobs should never be used without additional data clarifying their size and the nature of their contents.
-- **Qualified Hash**: A Hash Descriptor followed by a Hash Value. This encodes both the procedure necessary to derive the hash value as well as the expected result. Special values:
+- **Qualified Hash**: A Hash Descriptor followed by a Blob. This encodes both the procedure necessary to derive the hash value as well as the expected result. Special values:
   - If the **Hash Type** is 0 and the **Content Length** is zero, this is a reference to the _Null Hash_. This will usually be used in the `parent` field of nodes that are the root of a tree within the Arbor Forest.
 - **Qualified Content**: A Content Type followed by a Content Length followed by a Blob of content.
 - **Qualified Key**: A Key Type followed by a Content Length followed by a Blob holding a public key.
