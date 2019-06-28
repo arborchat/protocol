@@ -47,6 +47,7 @@ The Arbor Forest uses a number of common field types with specific meanings. The
 - **Qualified Content**: A Content Type followed by a Content Length followed by a Blob of content.
 - **Qualified Key**: A Key Type followed by a Content Length followed by a Blob holding a public key.
 - **Qualified Signature**: A Signature Type followed by a Content Length followed by a Blob containing a signature.
+- **Timestamp**: A timestamp is a 64-bit unsigned integer representing the number of milliseconds since the Unix epoch started at 00:00:00 GMT on January 1st, 1970.
 - **SchemaVersion**: A 64 bit unsigned integer representing the version of the node schema that a node uses. This document specifies schema version 1.
 
 ### Common Fields
@@ -62,6 +63,7 @@ Common fields:
 - `depth` **Tree Depth**: the number of levels this node is from the root message in its tree. Root messages will be 0, their immediate child nodes should be 1.
 - `metadata` **Qualified Content**: arbitrary JSON data. Only valid if ContentType is JSON.
 - `author` **Qualified Hash**: the id of the Identity node that signed this node
+- `created` **Timestamp**: the time at which this node was created
 - `signature` **Qualified Signature**: the actual binary signature of the node. The structure of this field varies by the type of key in the `author` field. The Content Type of this field should be a signature type of some kind.
 
 ### Common Structure
@@ -75,6 +77,7 @@ Determine the values of these fields:
 - `parent`
 - `id_desc`
 - `depth`
+- `created`
 - `metadata`
 - `author`
 - all node-specific fields **order specified in the description of each node type**
